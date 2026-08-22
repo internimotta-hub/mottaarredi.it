@@ -12,7 +12,7 @@
   --charcoal: #444341;
   --muted: #767676;
   --accent: #544541;
-  --radius: 6px;
+  --radius: 0;
   --shadow: 0 10px 30px rgba(68, 67, 65, 0.08);
   --font-sans: "Montserrat", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -148,7 +148,6 @@ h1, h2, h3 { font-weight: 600; color: var(--charcoal); }
   display: none;
   background: none;
   border: 1px solid var(--line);
-  border-radius: 6px;
   padding: 0.45rem 0.6rem;
   cursor: pointer;
   color: var(--charcoal);
@@ -173,27 +172,33 @@ h1, h2, h3 { font-weight: 600; color: var(--charcoal); }
   object-fit: cover;
 }
 
-.hero-brand { text-align: center; }
+.hero-brand { text-align: left; }
 
-.hero-brand img.lockup {
-  width: min(340px, 80%);
-  margin-inline: auto;
-  margin-bottom: 1.8rem;
+.hero-title {
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--charcoal);
+  line-height: 1.28;
+  margin-bottom: 1.2rem;
 }
 
-.hero-brand h1 {
-  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.5;
-  margin-bottom: 2rem;
-}
-
-.hero-brand h1 em {
+.hero-title em {
   font-family: var(--font-serif);
   font-style: italic;
+  font-weight: 500;
   color: var(--accent);
-  font-size: 1.15em;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  font-size: 1.18em;
+}
+
+.hero-sub {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 2.2rem;
+  max-width: 44ch;
 }
 
 /* ------------------------------------------------ Bottoni */
@@ -219,7 +224,9 @@ h1, h2, h3 { font-weight: 600; color: var(--charcoal); }
 .btn-light { background: #fff; color: var(--charcoal); }
 .btn-light:hover { background: var(--cream); color: var(--charcoal); }
 
-.btn-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.cta-band .btn-row, .center .btn-row { justify-content: center; }
 
 /* ------------------------------------------------ Sezioni */
 
@@ -335,33 +342,39 @@ blockquote {
 
 .brand-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.2rem;
 }
 
 .brand-tile {
-  background: var(--paper);
-  border: 1px dashed var(--line);
+  background: var(--cream);
   aspect-ratio: 8 / 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   color: var(--muted);
   text-align: center;
   padding: 1rem;
 }
 
 .brand-tile strong {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   color: var(--charcoal);
   font-weight: 600;
+  border-bottom: 1px solid var(--sandline, #cfc9b8);
+  padding-bottom: 0.45rem;
 }
 
-.brand-tile small { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.brand-tile small {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
 
 /* ------------------------------------------------ Galleria */
 
@@ -371,10 +384,36 @@ blockquote {
   gap: 1.2rem;
 }
 
-.gallery figure { border: 1px solid var(--line); background: var(--paper); overflow: hidden; }
+.gallery figure {
+  position: relative;
+  background: var(--cream);
+  overflow: hidden;
+  margin: 0;
+}
 
-.gallery .ph { aspect-ratio: 3 / 4; }
-.gallery .ph img { width: 100%; height: 100%; object-fit: cover; }
+.gallery .ph { aspect-ratio: 3 / 4; overflow: hidden; height: 100%; }
+
+.gallery .ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.gallery figure:hover .ph img { transform: scale(1.045); }
+
+.gallery figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.4rem 1rem 0.85rem;
+  background: linear-gradient(transparent, rgba(35, 33, 30, 0.72));
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+}
+
+.gallery .featured { grid-column: span 2; grid-row: span 2; }
+.gallery .featured .ph { aspect-ratio: auto; }
 
 /* Striscia "dal nostro Instagram" */
 
@@ -384,7 +423,25 @@ blockquote {
   gap: 0.5rem;
 }
 
-.ig-strip a { display: block; overflow: hidden; }
+.ig-strip a { display: block; overflow: hidden; position: relative; }
+
+.ig-strip a::after {
+  content: "@motta_arredi";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: rgba(35, 33, 30, 0.55);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ig-strip a:hover::after { opacity: 1; }
 
 .ig-strip img {
   width: 100%;
@@ -395,12 +452,6 @@ blockquote {
 
 .ig-strip a:hover img { transform: scale(1.05); }
 
-.gallery figcaption {
-  padding: 0.8rem 1rem;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
 
 /* Striscia materiali */
 
@@ -499,6 +550,7 @@ blockquote {
   font-family: var(--font-sans);
   padding: 0.75rem 0.9rem;
   border: 1px solid var(--line);
+  border-radius: 0;
   background: #fff;
   color: var(--ink);
 }
@@ -565,6 +617,23 @@ blockquote {
   flex-wrap: wrap;
 }
 
+/* ------------------------------------------------ Utility */
+
+.mt-s { margin-top: 0.7rem; }
+.mt-m { margin-top: 1.2rem; }
+.mb-m { margin-bottom: 1.5rem; }
+.mb-l { margin-bottom: 2.5rem; }
+.align-start { align-items: start; }
+.stack { display: grid; gap: 1.2rem; }
+
+.svc-note {
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* ------------------------------------------------ Pagina 404 */
 
 .page-404 {
@@ -582,7 +651,7 @@ blockquote {
 @media (max-width: 900px) {
   .grid-3, .gallery, .steps, .materials { grid-template-columns: repeat(2, 1fr); }
   .ig-strip { grid-template-columns: repeat(3, 1fr); }
-  .brand-grid { grid-template-columns: repeat(3, 1fr); }
+  .brand-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
   .hero .container { grid-template-columns: 1fr; }
   .hero-photo img { aspect-ratio: 16 / 10; }
@@ -611,6 +680,9 @@ blockquote {
   .grid-3, .steps { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .materials, .ig-strip { grid-template-columns: repeat(3, 1fr); }
-  .brand-grid { grid-template-columns: repeat(2, 1fr); }
+  .brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .site-footer .cols { grid-template-columns: 1fr; }
 }
+
+/* NOTA: dopo ogni modifica a questo file aggiornare l'hash ?v= nei <link> delle pagine
+   (python: hashlib.md5 dei byte del file, primi 8 caratteri) per invalidare le cache. */
