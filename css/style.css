@@ -11,6 +11,7 @@
   --ink: #545454;
   --charcoal: #444341;
   --muted: #767676;
+  --muted-dark: #67635a; /* contrasto >= 4.5:1 sul crema, per testi secondari su sfondo .alt */
   --accent: #544541;
   --radius: 0;
   --shadow: 0 10px 30px rgba(68, 67, 65, 0.08);
@@ -246,6 +247,15 @@ h1, h2, h3 { font-weight: 600; color: var(--charcoal); }
 .section-head p { color: var(--muted); margin-top: 1rem; }
 .section-head.center { margin-inline: auto; text-align: center; }
 
+.section.alt .section-head p,
+.section.alt .step p,
+.section.alt .sede .tag { color: var(--muted-dark); }
+
+.section-head p a, .prose p a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ------------------------------------------------ Griglie */
 
 .grid-3 {
@@ -319,7 +329,7 @@ h1, h2, h3 { font-weight: 600; color: var(--charcoal); }
   border-bottom: 1px solid var(--line);
 }
 
-.svc-list .num { font-weight: 600; letter-spacing: 0.15em; color: var(--muted); font-size: 0.9rem; }
+.svc-list .num { font-weight: 600; letter-spacing: 0.15em; color: var(--muted-dark); font-size: 0.9rem; }
 
 .svc-list .label {
   text-transform: uppercase;
@@ -373,7 +383,7 @@ blockquote {
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  opacity: 0.75;
+  color: var(--muted-dark);
 }
 
 /* ------------------------------------------------ Galleria */
@@ -593,7 +603,7 @@ blockquote {
   border-bottom: 1px solid var(--line);
 }
 
-.site-footer h4 {
+.site-footer h3 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
