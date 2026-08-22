@@ -26,11 +26,11 @@ if (form) {
       'Telefono: ' + (data.get('telefono') || '') + '\n\n' +
       (data.get('messaggio') || '')
     );
-    window.location.href = 'mailto:info@mottaarredi.it?subject=' + subject + '&body=' + body;
+    window.location.href = 'mailto:internimotta@gmail.com?subject=' + subject + '&body=' + body;
 
     const note = document.getElementById('form-note');
     if (note) {
-      note.textContent = 'Si aprirà il tuo programma di posta con il messaggio già compilato. In alternativa scrivici a info@mottaarredi.it.';
+      note.textContent = 'Si aprirà il tuo programma di posta con il messaggio già compilato. In alternativa scrivici a internimotta@gmail.com.';
     }
   });
 }
