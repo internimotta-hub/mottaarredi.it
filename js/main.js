@@ -34,3 +34,32 @@ if (form) {
     }
   });
 }
+
+
+// Marca la presenza di JS (il reveal parte solo così: senza JS tutto resta visibile)
+document.documentElement.classList.add('js');
+
+// Ombra dell'header allo scroll
+const header = document.querySelector('.site-header');
+if (header) {
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+// Reveal delicato allo scroll
+const revealables = document.querySelectorAll('.step, .card, .gallery figure, .sede, .materials img, .ig-strip a, .svc-list li');
+revealables.forEach((el, i) => {
+  el.classList.add('reveal');
+  el.style.transitionDelay = (i % 6) * 60 + 'ms';
+});
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  revealables.forEach((el) => io.observe(el));
+} else {
+  revealables.forEach((el) => el.classList.add('in-view'));
+}
