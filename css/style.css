@@ -373,8 +373,27 @@ blockquote {
 
 .gallery figure { border: 1px solid var(--line); background: var(--paper); overflow: hidden; }
 
-.gallery .ph { aspect-ratio: 4 / 3; }
+.gallery .ph { aspect-ratio: 3 / 4; }
 .gallery .ph img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Striscia "dal nostro Instagram" */
+
+.ig-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+}
+
+.ig-strip a { display: block; overflow: hidden; }
+
+.ig-strip img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.ig-strip a:hover img { transform: scale(1.05); }
 
 .gallery figcaption {
   padding: 0.8rem 1rem;
@@ -428,7 +447,7 @@ blockquote {
 
 .sedi-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 1.6rem;
 }
 
@@ -561,7 +580,8 @@ blockquote {
 /* ------------------------------------------------ Responsive */
 
 @media (max-width: 900px) {
-  .grid-3, .gallery, .steps, .materials, .sedi-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .gallery, .steps, .materials { grid-template-columns: repeat(2, 1fr); }
+  .ig-strip { grid-template-columns: repeat(3, 1fr); }
   .brand-grid { grid-template-columns: repeat(3, 1fr); }
   .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
   .hero .container { grid-template-columns: 1fr; }
@@ -588,8 +608,9 @@ blockquote {
   .main-nav ul { flex-direction: column; gap: 0; padding: 0.5rem 0; }
   .main-nav a { display: block; padding: 0.8rem 1.5rem; border-bottom: none; }
 
-  .grid-3, .gallery, .steps, .sedi-grid { grid-template-columns: 1fr; }
-  .materials { grid-template-columns: repeat(3, 1fr); }
+  .grid-3, .steps { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .materials, .ig-strip { grid-template-columns: repeat(3, 1fr); }
   .brand-grid { grid-template-columns: repeat(2, 1fr); }
   .site-footer .cols { grid-template-columns: 1fr; }
 }
