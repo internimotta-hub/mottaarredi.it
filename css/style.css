@@ -712,10 +712,6 @@ blockquote {
 
 /* ------------------------------------------------ Reveal allo scroll */
 
-@keyframes pageIn { from { opacity: 0; } }
-html.js body { animation: pageIn 0.5s ease; }
-@media (prefers-reduced-motion: reduce) { html.js body { animation: none; } }
-
 html.js .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -725,11 +721,7 @@ html.js .reveal {
 html.js .reveal.in-view { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  @keyframes pageIn { from { opacity: 0; } }
-html.js body { animation: pageIn 0.5s ease; }
-@media (prefers-reduced-motion: reduce) { html.js body { animation: none; } }
-
-html.js .reveal { opacity: 1; transform: none; transition: none; }
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ------------------------------------------------ Utility */
