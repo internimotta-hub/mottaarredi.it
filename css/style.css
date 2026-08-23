@@ -762,5 +762,23 @@ html.js .reveal.in-view { opacity: 1; transform: none; }
   .site-footer .cols { grid-template-columns: 1fr; }
 }
 
+
+/* ------------- Segnaposto immagine brand (Chi siamo) — da sostituire con foto reale */
+
+.figure-logo {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  padding: clamp(2rem, 6vw, 3.5rem);
+}
+
+.figure-logo img {
+  width: min(100%, 380px);
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
 /* NOTA: dopo ogni modifica a questo file aggiornare l'hash ?v= nei <link> delle pagine
    (python: hashlib.md5 dei byte del file, primi 8 caratteri) per invalidare le cache. */
